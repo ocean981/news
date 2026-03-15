@@ -1,0 +1,16 @@
+import feedparser
+
+# 使用 BBC 世界新闻的 RSS 源（免费，无需 API Key）
+NEWS_FEED = "http://feeds.bbci.co.uk/news/world/rss.xml"  # 注意域名是 bbci.co.uk，不是 bbc.co.uk
+
+def fetch_news():
+    feed = feedparser.parse(NEWS_FEED)  # 使用大写的变量名
+    print(f"📰 最新新闻来源: {feed.feed.title}\n")
+    
+    # 取前10条新闻（如果不足10条则全部显示）
+    for i, entry in enumerate(feed.entries[:10], start=1):
+        print(f"{i}. {entry.title}")
+        print(f"   🔗 {entry.link}\n")
+
+if __name__ == "__main__":
+    fetch_news()
